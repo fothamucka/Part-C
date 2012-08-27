@@ -1,9 +1,9 @@
 <?php
 
 	define("USER_HOME_DIR", "/home/a/asudjoko/.HTMLinfo");
-	require("USER_HOME_DIR . "/php/Smarty-2.6.26/Smarty.class.php");
+	require(USER_HOME_DIR . "/php/Smarty-2.6.26/Smarty.class.php");
 	
-	$smarty = new $Smarty();
+	$smarty = new Smarty;
 	
 	$smarty->template_dir = USER_HOME_DIR . "/wda/PartC/smartydocs/templates";
 	$smarty->compile_dir = USER_HOME_DIR . "/wda/PartC/smartydocs/templates_c";
@@ -20,28 +20,42 @@
 	$smarty->assign('get', $minPrice);
 	$smarty->assign('get', $maxPrice);
 	
-	function selectOption($connection, $tableName, $columnName, $dropdownName)
-	{
-		$query = "SELECT DISTINCT $columnName
-				  FROM $tableName";
+	$query = "SELECT DISTINCT region_name
+                  FROM region";
 				  
-		$results = mysql_query ($query, $connection)
+	$results = mysql_query($query, $connection);
 		
-		$i=0;
-		while ($row = @ mysql_fetch_array($result))
-		{
-			$resultArray[i++] = $row[$columnName];
-		}
-		
-		$smarty->assign('dropdownName', $resultArray());
-	}
+        $i=0;
+	while ($row = @ mysql_fetch_array($results))
+           $resultArray[$i++] = $row[region_name];
 	
-	selectOption($connection, "region", "region_name")
-	
-	selectOption($connection, "grape_variety", "variety")
-	
-	selectOption($connection, "wine", "year")
-	
+        $smarty->assign('id', $resultArray);
+        $smarty->assign('region', $resultArray);
+
+        $query = "SELECT DISTINCT variety
+                  FROM grape_variety";
+
+        $results = mysql_query($query, $connection);
+
+        $i=0;
+        while ($row = @ mysql_fetch_array($results))
+           $resultArray[$i++] = $row[variety];
+
+        $smarty->assign('id', $resultArray);
+        $smarty->assign('variety', $resultArray);
+
+        $query = "SELECT DISTINCT year
+                  FROM wine";
+
+        $results = mysql_query($query, $connection);
+
+        $i=0;
+        while ($row = @ mysql_fetch_array($results))
+           $resultArray[$i++] = $row[year];
+
+        $smarty->assign('id', $resultArray);
+        $smarty->assign('year', $resultArray);
+
 	$smarty->display('smarty_search.tpl');
 	
 ?>
