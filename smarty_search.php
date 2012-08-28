@@ -1,9 +1,9 @@
 <?php
 
 	define("USER_HOME_DIR", "/home/a/asudjoko/.HTMLinfo");
-	require(USER_HOME_DIR . "/php/Smarty-2.6.26/Smarty.class.php");
+	require(USER_HOME_DIR . "/php/Smarty-3.1.11/libs/Smarty.class.php");
 	
-	$smarty = new Smarty;
+	$smarty = new Smarty();
 	
 	$smarty->template_dir = USER_HOME_DIR . "/wda/PartC/smartydocs/templates";
 	$smarty->compile_dir = USER_HOME_DIR . "/wda/PartC/smartydocs/templates_c";
@@ -31,7 +31,7 @@
 	
         $smarty->assign('id', $resultArray);
         $smarty->assign('region', $resultArray);
-
+     
         $query = "SELECT DISTINCT variety
                   FROM grape_variety";
 
