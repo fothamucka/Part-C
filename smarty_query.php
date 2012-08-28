@@ -55,8 +55,11 @@
 	
 	$result = @ mysql_query($query, $connection);
 	
-	$data = @ mysql_fetch_array(($result);
-	
+        $hits = @ mysql_num_rows($result);
+
+	$data = @ mysql_fetch_array($result);
+
+	$smarty->assign('hits', $hits);
 	$smarty->assign('data', $data);
 	
 	$smarty->assign('get', $wineName);
